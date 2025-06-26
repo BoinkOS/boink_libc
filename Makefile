@@ -2,13 +2,17 @@ CC = i686-elf-gcc
 AR = i686-elf-ar
 CFLAGS = -ffreestanding -O2 -Wall -Wextra -Iinclude
 
-OBJS = src/syscall.o src/stdio.o src/stdlib.o
+SRCS = $(wildcard src/*.c)
+OBJS = $(SRCS:.c=.o)
 
-libc.a: $(OBJS)
-	$(AR) rcs libc.a $(OBJS)
+all: build/libc.a
+
+build/libc.a: $(OBJS)
+	mkdir -p build
+	$(AR) rcs $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) libc.a
-
-prune:
-	rm -f $(OBJS)
+	rm -f src/*.o build/libc.a
