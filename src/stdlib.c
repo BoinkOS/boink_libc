@@ -13,7 +13,3 @@ void sleep(int ms) {
 int uptime() {
 	return (int)syscall(SYSCALL_UPTIME, 0, 0, 0, 0, 0);
 }
-
-void allow_interrupts() {
-	syscall(SYSCALL_AINT, 0, 0, 0, 0, 0);
-}
