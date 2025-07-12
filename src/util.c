@@ -1,4 +1,5 @@
 #include <util.h>
+#include <stdbool.h>
 
 
 char* itoa(int val, int base){
